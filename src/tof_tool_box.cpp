@@ -1,6 +1,7 @@
 #include "tof_tool/tof_tool_box.h"
 
 const int DEBUG_doesPkgExist = 0;
+const int DEBUG_createFile = 0;
 
 using namespace std;
 
@@ -42,4 +43,32 @@ std::string TofToolBox::doesPkgExist(std::string pkg_name) {
         }
     }
     return getPkgPath;
+}
+
+//create a file
+int TofToolBox::createFile(std::string fileName) { //if this doesn't get called, no file is created
+    if (DEBUG_createFile) {
+        printf("DEBUG: createFile()\n");
+    }
+	std::ifstream fileExists(fileName);
+
+	if (fileExists.good() == 1) {
+		//File exists
+        if (DEBUG_createFile) {
+            printf("Weighting file exists\n");
+        }
+		//cout << fileName;
+		return 1;
+	}
+	else {
+		//File doesn't exist
+        if (DEBUG_createFile) {
+            printf("Weighting file doesn't exist\n");
+            printf("creating new file\n");
+        }
+		ofstream NEW_FILE (fileName);
+		NEW_FILE.close();
+		//cout << fileName;
+		return 0;
+	}
 }
