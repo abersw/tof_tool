@@ -1,7 +1,5 @@
 #include "tof_tool/tof_tool_box.h"
 
-const int DEBUG_doesPkgExist = 0;
-const int DEBUG_createFile = 0;
 
 using namespace std;
 
@@ -27,7 +25,6 @@ void TofToolBox::printSeparator(int spaceSize) {
 std::string TofToolBox::doesPkgExist(std::string pkg_name) {
     std::string getPkgPath;
 	if (ros::package::getPath(pkg_name) == "") {
-        printSeparator(0);
 		cout << "FATAL:  Couldn't find package " << pkg_name << "\n";
 		cout << "FATAL:  Closing node. \n";
         if (DEBUG_doesPkgExist) {
@@ -39,7 +36,7 @@ std::string TofToolBox::doesPkgExist(std::string pkg_name) {
     else {
         getPkgPath = ros::package::getPath(pkg_name);
         if (DEBUG_doesPkgExist) {
-            cout << getPkgPath << endl;
+            cout << "ROS package is: " << getPkgPath << endl;
         }
     }
     return getPkgPath;
@@ -71,4 +68,25 @@ int TofToolBox::createFile(std::string fileName) { //if this doesn't get called,
 		//cout << fileName;
 		return 0;
 	}
+}
+
+//calculate lines from files
+int TofToolBox::calculateLines(std::string fileName) {
+	if (DEBUG_calculateLines) {
+		cout << "DEBUG: calculateLines()\n";
+	}
+	ifstream FILE_COUNTER(fileName);
+	std::string getlines;
+	int returnCounter = 0;
+	while (getline (FILE_COUNTER, getlines)) {
+        returnCounter++;
+        // Output the text from the file
+        //cout << getlines;
+        //cout << "\n";
+	}
+	FILE_COUNTER.close();
+    if (DEBUG_calculateLines) {
+        cout << returnCounter << endl;
+    }
+	return returnCounter;
 }

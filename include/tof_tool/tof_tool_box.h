@@ -29,9 +29,13 @@ class TofToolBox {
         void printSeparator(int spaceSize);
         std::string doesPkgExist(std::string pkg_name);
         int createFile(std::string fileName);
+        int calculateLines(std::string fileName);
 
     private:
-        //nothing here
+        //debug variables
+        const int DEBUG_doesPkgExist = 0;
+        const int DEBUG_createFile = 0;
+        const int DEBUG_calculateLines = 0;
 };
 
 #endif
