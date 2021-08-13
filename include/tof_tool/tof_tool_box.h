@@ -6,8 +6,12 @@
 #include <ros/ros.h> //main ROS library
 #include <ros/package.h> //find ROS packages, needs roslib dependency
 #include <std_srvs/Empty.h>
+#include "wheelchair_msgs/mobilenet.h" //depth sensing
 #include "wheelchair_msgs/foundObjects.h"
 #include "wheelchair_msgs/objectLocations.h"
+
+#include "sensor_msgs/Image.h" //depth sensing
+#include "sensor_msgs/PointCloud2.h" //depth sensing
 
 //experimental
 #include "geometry_msgs/PointStamped.h"
@@ -18,6 +22,13 @@
 
 #include "tf/transform_listener.h"
 #include "tf/transform_broadcaster.h"
+#include "tf/transform_datatypes.h" //depth sensing
+
+#include <message_filters/subscriber.h> //depth sensing
+#include <message_filters/time_synchronizer.h> //depth sensing
+#include <message_filters/synchronizer.h> //depth sensing
+#include <message_filters/sync_policies/approximate_time.h> //depth sensing
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
