@@ -5,10 +5,14 @@
 #include <string.h>
 #include <ros/ros.h> //main ROS library
 #include <ros/package.h> //find ROS packages, needs roslib dependency
+#include "std_msgs/String.h" //for room name topic - assign room to object
 #include <std_srvs/Empty.h>
 #include "wheelchair_msgs/mobilenet.h" //depth sensing
 #include "wheelchair_msgs/foundObjects.h"
 #include "wheelchair_msgs/objectLocations.h"
+
+#include "wheelchair_msgs/roomLocations.h" //assign room to object
+#include "wheelchair_msgs/roomToObjects.h" //assign room to object
 
 #include "sensor_msgs/Image.h" //depth sensing
 #include "sensor_msgs/PointCloud2.h" //depth sensing

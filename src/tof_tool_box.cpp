@@ -10,6 +10,11 @@ void TofToolBox::sayHello() {
 //function for printing space sizes
 // 0  little space
 // 1  big space
+/**
+ * function for printing space sizes
+ * 0  little space
+ * 1  big space
+ */
 void TofToolBox::printSeparator(int spaceSize) {
 	if (spaceSize == 0) {
 		printf("--------------------------------------------\n");
@@ -21,7 +26,10 @@ void TofToolBox::printSeparator(int spaceSize) {
 	}
 }
 
-//does the wheelchair dump package exist in the workspace?
+/**
+ * Does the wheelchair_dump package exist in the workspace?
+ * If it's missing, close down the node safely
+ */
 std::string TofToolBox::doesPkgExist(std::string pkg_name) {
     std::string getPkgPath;
 	if (ros::package::getPath(pkg_name) == "") {
@@ -42,7 +50,12 @@ std::string TofToolBox::doesPkgExist(std::string pkg_name) {
     return getPkgPath;
 }
 
-//create a file
+/**
+ * Function to check if file exists in the 'fileName' path, if it doesn't exist create a new one
+ *
+ * @param the path and file name to be created called 'fileName'
+ * @return return '1' if file already exists, return '0' if file was missing and has been created
+ */
 int TofToolBox::createFile(std::string fileName) { //if this doesn't get called, no file is created
     if (DEBUG_createFile) {
         printf("DEBUG: createFile()\n");
@@ -70,7 +83,11 @@ int TofToolBox::createFile(std::string fileName) { //if this doesn't get called,
 	}
 }
 
-//calculate lines from files
+/**
+ * calculate number of lines present in fileName
+ * while we haven't reached the end of the file
+ * iterate returncounter on each line, return the value
+ */
 int TofToolBox::calculateLines(std::string fileName) {
 	if (DEBUG_calculateLines) {
 		cout << "DEBUG: calculateLines()\n";
