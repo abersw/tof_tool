@@ -7,9 +7,6 @@ void TofToolBox::sayHello() {
     ROS_INFO("Hello!");
 }
 
-//function for printing space sizes
-// 0  little space
-// 1  big space
 /**
  * function for printing space sizes
  * 0  little space
@@ -87,6 +84,8 @@ int TofToolBox::createFile(std::string fileName) { //if this doesn't get called,
  * calculate number of lines present in fileName
  * while we haven't reached the end of the file
  * iterate returncounter on each line, return the value
+ * @param the path and file name to be calculated called 'fileName'
+ * @return 'returnCounter' return the number of lines in the file
  */
 int TofToolBox::calculateLines(std::string fileName) {
 	if (DEBUG_calculateLines) {
