@@ -14,6 +14,10 @@
 #include "wheelchair_msgs/roomLocations.h" //assign room to object
 #include "wheelchair_msgs/roomToObjects.h" //assign room to object
 
+#include "wheelchair_msgs/objectContext.h" //object context info
+
+#include "move_base_msgs/MoveBaseActionGoal.h" //move_base msg for sending map goals
+
 #include "sensor_msgs/Image.h" //depth sensing
 #include "sensor_msgs/PointCloud2.h" //depth sensing
 
