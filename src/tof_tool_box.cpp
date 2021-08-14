@@ -11,6 +11,7 @@ void TofToolBox::sayHello() {
  * function for printing space sizes
  * 0  little space
  * 1  big space
+ * @param 'spaceSize' size of the space required when printing
  */
 void TofToolBox::printSeparator(int spaceSize) {
 	if (spaceSize == 0) {
@@ -26,6 +27,8 @@ void TofToolBox::printSeparator(int spaceSize) {
 /**
  * Does the wheelchair_dump package exist in the workspace?
  * If it's missing, close down the node safely
+ * @param 'pkg_name' name of package to find within workspace
+ * @return 'getPkgPath' full path of package 'pkg_name'
  */
 std::string TofToolBox::doesPkgExist(std::string pkg_name) {
     std::string getPkgPath;
