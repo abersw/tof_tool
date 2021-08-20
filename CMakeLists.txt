@@ -17,7 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_ros
   geometry_msgs
   std_msgs
-  wheelchair_msgs
+  #wheelchair_msgs
 )
 
 ## System dependencies are found with CMake's conventions
