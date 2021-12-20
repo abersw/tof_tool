@@ -109,3 +109,75 @@ int TofToolBox::calculateLines(std::string fileName) {
     }
 	return returnCounter;
 }
+
+/**
+ * print out status of NaN detection for vectors and quaternions
+ * inside a tf::Transform
+ * @param option 0 is transform.getOrigin, 1 is transform.getRotation
+ * @param myTransform from tf::transform vector
+ * @return 'detectedNaN' return 1 if NaN detected, 0 if no NaN
+ */
+void TofToolBox::validateTransformPrint(int option, tf::Transform myTransform) {
+	if (option == 0) {
+		//get origin
+		cout << myTransform.getOrigin().x() << ", " <<
+					myTransform.getOrigin().y() << ", " <<
+					myTransform.getOrigin().z() << endl;
+	}
+	else if (option == 1) {
+		//get rotation
+		cout << myTransform.getOrigin().x() << ", " <<
+					myTransform.getOrigin().y() << ", " <<
+					myTransform.getOrigin().y() << ", " <<
+					myTransform.getOrigin().z() << endl;
+	}
+}
+
+/**
+ * search for NaN in vector and quaternions
+ * inside a tf::Transform
+ * @param myTransform from tf::transform vector
+ * @return 'detectedNaN' return 1 if NaN detected, 0 if no NaN
+ */
+int TofToolBox::validateTransform(tf::Transform myTransform) {
+	int detectedNaN = 0;
+    if ((isnan(myTransform.getOrigin().x())) ||
+        (isnan(myTransform.getOrigin().y())) ||
+        (isnan(myTransform.getOrigin().z()))) {
+        if (DEBUG_nan_detector) {
+            cout << "NaN detected in local DET transform, using getOrigin" << endl;
+			validateTransformPrint(0, myTransform);
+        }
+        detectedNaN = 1;
+    }
+	if ((isnan(myTransform.getRotation().x())) &&
+		(isnan(myTransform.getRotation().y())) &&
+		(isnan(myTransform.getRotation().z())) &&
+		(isnan(myTransform.getRotation().w()))) {
+		if (DEBUG_nan_detector) {
+            cout << "NaN detected in local DET transform, using getRotation" << endl;
+			validateTransformPrint(1, myTransform);
+        }
+        detectedNaN = 1;
+	}
+    if ((!rviz::validateFloats(myTransform.getOrigin().x())) ||
+        (!rviz::validateFloats(myTransform.getOrigin().y())) ||
+        (!rviz::validateFloats(myTransform.getOrigin().z())) ) {
+        if (DEBUG_nan_detector) {
+            cout << "NaN detected whilst validating myTransform.getOrigin in RVIZ" << endl;
+			validateTransformPrint(0, myTransform);
+        }
+        detectedNaN = 1;
+    }
+	if ((!rviz::validateFloats(myTransform.getRotation().x())) ||
+        (!rviz::validateFloats(myTransform.getRotation().y())) ||
+		(!rviz::validateFloats(myTransform.getRotation().z())) ||
+        (!rviz::validateFloats(myTransform.getRotation().w())) ) {
+        if (DEBUG_nan_detector) {
+            cout << "NaN detected whilst validating myTransform.getRotation in RVIZ" << endl;
+			validateTransformPrint(1, myTransform);
+        }
+        detectedNaN = 1;
+    }
+	return detectedNaN;
+}
